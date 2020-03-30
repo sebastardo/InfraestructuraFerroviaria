@@ -1,8 +1,5 @@
 # Infraestructura ferroviaria
  
-[![Build Status](https://travis-ci.org/wollok/infraFerroviaria.svg?branch=master)](https://travis-ci.org/wollok/infraFerroviaria)
-
-
 
 Una administradora ferroviaria necesita una aplicación que le ayude a manejar las formaciones que tiene disponibles en distintos depósitos.
 
