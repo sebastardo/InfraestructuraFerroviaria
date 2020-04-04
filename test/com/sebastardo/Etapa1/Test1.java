@@ -5,6 +5,7 @@
  */
 package com.sebastardo.Etapa1;
 
+import com.sebastardo.Formacion;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,12 +18,32 @@ import static org.junit.Assert.*;
  * @author Sebastian
  */
 public class Test1 {
+    static Formacion tren;
+    
+    
+    
+    static VagonPasajeros p1;
+    static VagonPasajeros p2;
+    static VagonCarga c;
+    static VagonDormitorio d;
+    
     
     public Test1() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        tren = new Formacion();
+        
+        p1 = new VagonPasajeros(10,4, true, true);
+        p2 = new VagonPasajeros(7,2, false, false);
+        c = new VagonCarga(6800,5);
+        d = new VagonDormitorio(8,3);
+        
+        tren.agregar(p1);
+        tren.agregar(p2);
+        tren.agregar(c);
+        tren.agregar(d);
     }
     
     @AfterClass
@@ -37,19 +58,10 @@ public class Test1 {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
     
     @Test
-    public void TestFormacion(){
-        VagonPasajeros x = new VagonPasajeros(10,5, true, true);
-        Formacion tren = new Formacion();
-        
-        tren.agregar(x);
-        
-
+    public void TestEquilibradaEnPasajeros(){
+        assertFalse(tren.equilibradaEnPasajeros());
     }
 }

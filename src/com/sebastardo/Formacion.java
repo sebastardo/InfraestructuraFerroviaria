@@ -1,5 +1,9 @@
-package com.sebastardo.Etapa1;
+package com.sebastardo;
 
+import com.sebastardo.Etapa1.Vagon;
+import com.sebastardo.Etapa1.VagonCarga;
+import com.sebastardo.Etapa1.VagonPasajeros;
+import com.sebastardo.Etapa2.Locomotora;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -39,13 +43,19 @@ import java.util.List;
  */
 public class Formacion {
     private List<Vagon> tren;
+    private List<Locomotora> maquina;
     
     public Formacion(){
         tren = new ArrayList<>();
+        maquina = new ArrayList<>();
     }
     
-    public void agregar(Vagon v){
-        tren.add(v);
+    public void agregar(Object v){
+        if(v instanceof Vagon){
+            tren.add((Vagon)v);
+        }if(v instanceof Locomotora){
+            maquina.add((Locomotora)v);
+        }
     }
     
     public int cantidadPasajeros(){
@@ -61,7 +71,8 @@ public class Formacion {
     }
     
     public int dispersionDePesos(){
-        return tren.stream().max(Comparator.comparing(Vagon::getPeso)).get().getPeso() - tren.stream().min(Comparator.comparing(Vagon::getPeso)).get().getPeso();
+        return tren.stream().max(Comparator.comparing(Vagon::getPeso)).get().getPeso() 
+                - tren.stream().min(Comparator.comparing(Vagon::getPeso)).get().getPeso();
     }
     
     public int cantidadDeBaños(){
@@ -87,13 +98,40 @@ public class Formacion {
     
     public boolean equilibradaEnPasajeros(){
         // TODO
-        return true;
+        //si está equilbrada en pasajeros, o sea: si considerando sólo los vagones que llevan pasajeros, 
+        // la diferencia entre el que más lleva y el que menos no supera los 20 pasajeros.
+       
+        return (
+                tren.stream().filter(v->v.getPasajeros()>0).max(Comparator.comparing(Vagon::getPasajeros)).get().getPasajeros() -
+                tren.stream().filter(v->v.getPasajeros()>0).min(Comparator.comparing(Vagon::getPasajeros)).get().getPasajeros() 
+                ) <= 20;
     } 
     
     public boolean organizada(){
         // TODO
-        // 
-        // 3 opciones: (si todos llevan pasajeros o ninguno lleva pasajero
         return true;
+    }
+    
+    
+    ////////////////////////////////
+    //  LOCOMOTORAS
+    ///////////////////////////////
+
+    
+    public int velocidadMaxima(){
+        return maquina.stream().min(Comparator.comparing(Locomotora::getVelocidadMaxima)).get().getVelocidadMaxima();
+    }
+    
+    public boolean esEficiente(){
+        return maquina.stream().allMatch(l->l.esEficiente());
+    }
+    
+    public boolean puedeMoverse(){
+        return maquina.stream().mapToInt(l->l.getPesoArrastre()).sum() 
+                >= (maquina.stream().mapToInt(l->l.getPeso()).sum() + tren.stream().mapToInt(v->v.getPeso()).sum());
+    }
+    
+    public int kilosDeEmpuje(){
+        return puedeMoverse()?0:(maquina.stream().mapToInt(l->l.getPeso()).sum() + tren.stream().mapToInt(v->v.getPeso()).sum()-maquina.stream().mapToInt(l->l.getPesoArrastre()).sum());
     }
 }
