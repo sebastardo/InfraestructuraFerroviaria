@@ -113,6 +113,11 @@ public class Formacion {
     }
     
     
+    public Vagon vagonMasPesado(){
+        return tren.stream().max(Comparator.comparing(Vagon::getPeso)).get();
+    }
+    
+    
     ////////////////////////////////
     //  LOCOMOTORAS
     ///////////////////////////////
@@ -132,6 +137,18 @@ public class Formacion {
     }
     
     public int kilosDeEmpuje(){
-        return puedeMoverse()?0:(maquina.stream().mapToInt(l->l.getPeso()).sum() + tren.stream().mapToInt(v->v.getPeso()).sum()-maquina.stream().mapToInt(l->l.getPesoArrastre()).sum());
+        return puedeMoverse()?0:(pesoTotal() - maquina.stream().mapToInt(l->l.getPesoArrastre()).sum());
+    }
+    
+    //////////////////////////////
+    //  TODO
+    /////////////////////////////
+    
+    public int tamaño(){
+        return tren.size() + maquina.size();
+    }
+    
+    public int pesoTotal(){
+        return maquina.stream().mapToInt(l->l.getPeso()).sum() + tren.stream().mapToInt(v->v.getPeso()).sum();
     }
 }
