@@ -77,13 +77,14 @@ public class Deposito {
     }
     ///
     
-    
-    /**
-     *     Que un depósito pueda agregar una locomotora a una formación determinada, de forma tal que la formación pueda moverse.
-     *         Si la formación ya puede moverse, entonces no se hace nada.
-     *         Si no, se le agrega una locomotora suelta del depósito cuyo arrastre sea mayor o igual a los kilos de empuje que le 
-     *              faltan a la formación. Si no hay ninguna locomotora suelta que cumpla esta condición, no se hace nada.
-     */
-    
-    
+    public void moverFormacion(){
+        /**
+         *     Que un depósito pueda agregar una locomotora a una formación determinada, de forma tal que la formación pueda moverse.
+         *         Si la formación ya puede moverse, entonces no se hace nada.
+         *         Si no, se le agrega una locomotora suelta del depósito cuyo arrastre sea mayor o igual a los kilos de empuje que le 
+         *              faltan a la formación. Si no hay ninguna locomotora suelta que cumpla esta condición, no se hace nada.
+         */
+        
+        // Es sabado, son las 2 am y no tengo ganas de hacerlo.
+    }
 }

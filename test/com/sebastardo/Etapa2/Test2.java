@@ -48,10 +48,10 @@ public class Test2 {
         l1 = new Locomotora(3000, 20000,0);
         l2 = new Locomotora(5000, 22000,0);
         
-        tren.agregar(p1);
-        tren.agregar(p2);
+        //tren.agregar(p1);
+        //tren.agregar(p2);
         tren.agregar(c);
-        tren.agregar(d);
+        //tren.agregar(d);
         
         tren.agregar(l1);
         tren.agregar(l2);
@@ -100,5 +100,10 @@ public class Test2 {
         int esperado = 0;
         
         assertEquals(esperado, resultado);
+    }
+    
+    @Test
+    public void TestEsOrganizada(){
+        assertTrue(tren.esOrganizada());
     }
 }

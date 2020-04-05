@@ -97,18 +97,24 @@ public class Formacion {
     
     
     public boolean equilibradaEnPasajeros(){
-        // TODO
-        //si está equilbrada en pasajeros, o sea: si considerando sólo los vagones que llevan pasajeros, 
-        // la diferencia entre el que más lleva y el que menos no supera los 20 pasajeros.
-       
         return (
                 tren.stream().filter(v->v.getPasajeros()>0).max(Comparator.comparing(Vagon::getPasajeros)).get().getPasajeros() -
                 tren.stream().filter(v->v.getPasajeros()>0).min(Comparator.comparing(Vagon::getPasajeros)).get().getPasajeros() 
                 ) <= 20;
     } 
     
-    public boolean organizada(){
-        // TODO
+    public boolean esOrganizada(){
+       
+        boolean flag = false;
+        for(Vagon v : tren){
+            if(v.getPasajeros()>0){
+                if(flag)
+                    return false;
+            }
+            else{
+                flag = true;
+            }
+        }
         return true;
     }
     
